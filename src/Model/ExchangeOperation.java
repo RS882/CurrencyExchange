@@ -3,6 +3,7 @@ package Model;
 import Currency.Currency;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Class data model for exchange obeparation
@@ -81,10 +82,13 @@ public class ExchangeOperation {
     @Override
     public String toString() {
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
                 return String.format(
-                "#%d. Exchange " +
+                "#%d. %s Exchange " +
                        "%.2f%s to %.2f%s. Exchange rate - %.4f. Commision - %.2f%%.%n",
                 this.id,
+                this.dateOfOperation.format(formatter),
                 this.sumIn,
                 this.currencyIn,
                 this.sumOut,
