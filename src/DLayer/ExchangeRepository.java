@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ExchangeRepository {
 
-    private static final String FILE_PATH = "src/exchangeLog.txt";
+    private static final String FILE_PATH = "src/DLayer/exchangeLog.txt";
     private File file;
     private List<ExchangeOperation> operations = new ArrayList<>();
 
