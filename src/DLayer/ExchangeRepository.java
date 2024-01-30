@@ -12,6 +12,10 @@ public class ExchangeRepository {
     private File file;
     private List<ExchangeOperation> operations = new ArrayList<>();
 
+    public ExchangeRepository() {
+
+        this.file = new File(FILE_PATH);
+    }
     public boolean addOperation(ExchangeOperation operation){
         return false;
     }
