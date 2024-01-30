@@ -97,6 +97,19 @@ public class ExchangeOperation {
                 this.COMMISION);
     }
 
+    public String getCSV() {
+        StringBuilder res = new StringBuilder();
+        res.append(this.id + ",")
+                .append(this.dateOfOperation + ",")
+                .append(this.sumIn + ",")
+                .append(this.currencyIn + ",")
+                .append(this.sumOut + ",")
+                .append(this.currencyOut + ",")
+                .append(this.rate + ",")
+                .append(this.COMMISION + ",");
+        return res.toString();
+    }
+
 }
 
 
