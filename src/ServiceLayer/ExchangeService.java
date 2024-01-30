@@ -13,9 +13,6 @@ public class ExchangeService {
     // which will be used for interacting with exchange operation data:
     private ExchangeRepository repository;
 
-    public ExchangeService(ExchangeRepository repository) {
-        this.repository = repository;
-    }
 
 
     // Public method that performs currency exchange based on the provided parameters of amount and currencies.
@@ -30,36 +27,23 @@ public class ExchangeService {
                 Rates.getRate(operation.getCurrencyIn());
         double sumOut = calculateExchange(operation, exchangeRate);
         operation.setSumOut(sumOut);
+
         operation.setRate(exchangeRate);
         addOperation(operation);
+
         return sumOut;
     }
 
     // Logic for calculating the exchange amount, taking into account the exchange rate and commission:
     private double calculateExchange(ExchangeOperation operation, double exchangeRate) {
-       // double exchangeRate = operation.getRate(operation.getCurrencyIn(), operation.getCurrencyOut());
-        double sumOut = calculatedSumOut(operation, exchangeRate);
-        return sumOut;
-    }
-
-    // Additional methods, if necessary
-    private double calculatedSumOut(ExchangeOperation operation, double exchangeRate) {
+        // double exchangeRate = operation.getRate(operation.getCurrencyIn(), operation.getCurrencyOut());
         double sumOut = operation.getSumIn() * exchangeRate * (1 - operation.getCOMMISION());
         return sumOut;
     }
 
-    private void addOperation(ExchangeOperation operation){
+private void addOperation(ExchangeOperation operation){
         this.repository.addOperation(operation);
-    }
+        }
 
-    // Public method that returns the exchange operation for the given identifier:
-    public ExchangeOperation getOperation(int id) {
-        // Implement this method to retrieve operation by id from the repository
-        return null;
-    }
+        }
 
-    public ArrayList<ExchangeOperation> getAllOperations() {
-        // Implement this method to retrieve all operations from the repository
-        return null;
-    }
-}
