@@ -2,6 +2,7 @@ package ServiceLayer;
 
 import Currency.Currency;
 import DLayer.ExchangeRepository;
+import DLayer.Rates;
 import Model.ExchangeOperation;
 
 import java.util.ArrayList;
@@ -25,23 +26,32 @@ public class ExchangeService {
 
     public double exchange(double sumIn, Currency currencyIn, Currency currencyOut) {
         ExchangeOperation operation = new ExchangeOperation(currencyIn, currencyOut, sumIn);
-        double sumOut = calculateExchange(operation);
+        double exchangeRate = Rates.getRate(operation.getCurrencyOut()) /
+                Rates.getRate(operation.getCurrencyIn());
+        double sumOut = calculateExchange(operation, exchangeRate);
         operation.setSumOut(sumOut);
-        repository.addOperation(operation);
+        operation.setRate(exchangeRate);
+        addOperation(operation);
         return sumOut;
     }
+
     // Logic for calculating the exchange amount, taking into account the exchange rate and commission:
-    private double calculateExchange(ExchangeOperation operation) {
-        double exchangeRate = operation.getRate(operation.getCurrencyIn(), operation.getCurrencyOut());
+    private double calculateExchange(ExchangeOperation operation, double exchangeRate) {
+       // double exchangeRate = operation.getRate(operation.getCurrencyIn(), operation.getCurrencyOut());
         double sumOut = calculatedSumOut(operation, exchangeRate);
         return sumOut;
     }
 
-// Additional methods, if necessary
+    // Additional methods, if necessary
     private double calculatedSumOut(ExchangeOperation operation, double exchangeRate) {
         double sumOut = operation.getSumIn() * exchangeRate * (1 - operation.getCOMMISION());
         return sumOut;
     }
+
+    private void addOperation(ExchangeOperation operation){
+        this.repository.addOperation(operation);
+    }
+
     // Public method that returns the exchange operation for the given identifier:
     public ExchangeOperation getOperation(int id) {
         // Implement this method to retrieve operation by id from the repository

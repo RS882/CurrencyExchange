@@ -75,7 +75,7 @@ public class ExchangeOperation {
         return this.COMMISION;
     }
 
-    public double getRate(Currency currencyIn, Currency currencyOut) {
+    public double getRate() {
         return this.rate;
     }
 
