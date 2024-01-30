@@ -1,0 +1,4 @@
+#1. Exchange 12,40CAD to 0,00CHF. Exchange rate - 0,0000. Commision - 3,00%.
+#1. Exchange 12,40EUR to 0,00CHF. Exchange rate - 0,0000. Commision - 3,00%.
+#1. Exchange 1,90EUR to 0,00CHF. Exchange rate - 0,0000. Commision - 3,00%.
+#1. Exchange 2,90EUR to 0,00CHF. Exchange rate - 0,0000. Commision - 3,00%.
