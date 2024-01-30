@@ -13,9 +13,13 @@ public class ExchangeRepository {
     private List<ExchangeOperation> operations = new ArrayList<>();
 
     public ExchangeRepository() {
-
         this.file = new File(FILE_PATH);
     }
+
+    private void printError(Exception e) {
+        System.err.println("Error: " + e.getMessage());
+    }
+
     public boolean addOperation(ExchangeOperation operation){
         return false;
     }
