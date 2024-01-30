@@ -39,6 +39,11 @@ public class ExchangeRepository {
     }
 
     public ExchangeOperation getOperation(int id){
+        for ( ExchangeOperation operation : operations) {
+            if (operation.getId() == id){
+                return operation;
+            }
+        }
         return null;
     }
 
