@@ -11,7 +11,7 @@ public class ExchangeService {
 
     // Private field 'repository' of type ExchangeRepository,
     // which will be used for interacting with exchange operation data:
-    private ExchangeRepository repository;
+    private ExchangeRepository repository = new ExchangeRepository();
 
 
 
@@ -21,7 +21,7 @@ public class ExchangeService {
     // Sets the calculated exchange amount in the created operation.
     // repository.addOperation(operation): Adds the operation to the repository for saving the history.
 
-    public double exchange(double sumIn, Currency currencyIn, Currency currencyOut) {
+    public ExchangeOperation exchange(double sumIn, Currency currencyIn, Currency currencyOut) {
         ExchangeOperation operation = new ExchangeOperation(currencyIn, currencyOut, sumIn);
         double exchangeRate = Rates.getRate(operation.getCurrencyOut()) /
                 Rates.getRate(operation.getCurrencyIn());
@@ -31,13 +31,13 @@ public class ExchangeService {
         operation.setRate(exchangeRate);
         addOperation(operation);
 
-        return sumOut;
+        return operation;
     }
 
     // Logic for calculating the exchange amount, taking into account the exchange rate and commission:
     private double calculateExchange(ExchangeOperation operation, double exchangeRate) {
         // double exchangeRate = operation.getRate(operation.getCurrencyIn(), operation.getCurrencyOut());
-        double sumOut = operation.getSumIn() * exchangeRate * (1 - operation.getCOMMISION());
+        double sumOut = operation.getSumIn() * exchangeRate * (1 - operation.getCOMMISION()/100);
         return sumOut;
     }
 

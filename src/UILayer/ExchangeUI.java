@@ -52,9 +52,9 @@ public class ExchangeUI {
         String currencyOutStr = scanner.next();
         Currency currencyOut = Currency.get(currencyOutStr);
 
-        double sumOut = exchangeService.exchange(sumIn, currencyIn, currencyOut);
+        ExchangeOperation operation = exchangeService.exchange(sumIn, currencyIn, currencyOut);
 
-        System.out.println("Вы получите " + sumOut + " " + currencyOut);
+        System.out.println(operation);
     }
     public static void getOperation() {
         Scanner scanner = new Scanner(System.in);
