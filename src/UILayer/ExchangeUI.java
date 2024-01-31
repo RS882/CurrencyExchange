@@ -61,7 +61,7 @@ public class ExchangeUI {
 
         System.out.print("Введите ID операции: ");
         int id = scanner.nextInt();
-
+//TODO не сервис
         ExchangeOperation operation = ExchangeRepository.getOperation(id);
 
         if (operation != null) {
