@@ -11,8 +11,7 @@ public class ExchangeService {
 
     // Private field 'repository' of type ExchangeRepository,
     // which will be used for interacting with exchange operation data:
-    private ExchangeRepository repository = new ExchangeRepository();
-
+    private final ExchangeRepository repository = new ExchangeRepository();
 
 
     // Public method that performs currency exchange based on the provided parameters of amount and currencies.
@@ -26,9 +25,10 @@ public class ExchangeService {
         double exchangeRate = Rates.getRate(operation.getCurrencyOut()) /
                 Rates.getRate(operation.getCurrencyIn());
         double sumOut = calculateExchange(operation, exchangeRate);
-        operation.setSumOut(sumOut);
 
+        operation.setSumOut(sumOut);
         operation.setRate(exchangeRate);
+
         addOperation(operation);
 
         return operation;
@@ -36,14 +36,23 @@ public class ExchangeService {
 
     // Logic for calculating the exchange amount, taking into account the exchange rate and commission:
     private double calculateExchange(ExchangeOperation operation, double exchangeRate) {
-        // double exchangeRate = operation.getRate(operation.getCurrencyIn(), operation.getCurrencyOut());
-        double sumOut = operation.getSumIn() * exchangeRate * (1 - operation.getCOMMISION()/100);
+        double sumOut = operation.getSumIn() * exchangeRate * (1 - operation.getCOMMISION() / 100);
         return sumOut;
     }
 
-private void addOperation(ExchangeOperation operation){
+    private void addOperation(ExchangeOperation operation) {
         this.repository.addOperation(operation);
-        }
+    }
 
-        }
+    // Public method that returns the exchange operation for the given identifier:
+    public ExchangeOperation getOperation(int id) {
+              return this.repository.getOperation(id);
+    }
+
+
+    public ArrayList<ExchangeOperation> getAllOperations() {
+        return this.repository.getAllOperations();
+    }
+}
+
 
