@@ -44,24 +44,83 @@ public class ExchangeUI {
         System.out.print("Введите сумму для обмена: ");
         double sumIn = scanner.nextDouble();
 
-        System.out.print("Введите валюту для обмена (USD, EUR, GBP, CHF, CAD): ");
-        String currencyInStr = scanner.next();
-        Currency currencyIn = Currency.get(currencyInStr);
+        if ((sumIn) < 0) {
+            System.out.println("Отрицательная сумма. Попробуйте снова.");
+        }
 
-        System.out.print("Введите валюту, которую вы хотите приобрести (USD, EUR, GBP, CHF, CAD): ");
-        String currencyOutStr = scanner.next();
-        Currency currencyOut = Currency.get(currencyOutStr);
+        System.out.println("Выберите валюту для обмена: ");
+        System.out.println("1. USD");
+        System.out.println("2. EUR");
+        System.out.println("3. GBP");
+        System.out.println("4. CHF");
+        System.out.println("5. CAD");
+        System.out.print("Выберите действие: ");
 
-        ExchangeOperation operation = exchangeService.exchange(sumIn, currencyIn, currencyOut);
+        int currencyInChoice = scanner.nextInt();
+        Currency currencyIn;
 
-        System.out.println(operation);
+        switch (currencyInChoice) {
+            case 1:
+                currencyIn = Currency.USD;
+                break;
+            case 2:
+                currencyIn = Currency.EUR;
+                break;
+            case 3:
+                currencyIn = Currency.GBP;
+                break;
+            case 4:
+                currencyIn = Currency.CHF;
+                break;
+            case 5:
+                currencyIn = Currency.CAD;
+                break;
+            default:
+                System.out.println("Неверный выбор валюты. Попробуйте снова.");
+                return;
+        }
+
+        System.out.println("Выберите валюту, которую вы хотите приобрести: ");
+        System.out.println("1. USD");
+        System.out.println("2. EUR");
+        System.out.println("3. GBP");
+        System.out.println("4. CHF");
+        System.out.println("5. CAD");
+        System.out.print("Выберите действие: ");
+
+        int currencyOutChoice = scanner.nextInt();
+        Currency currencyOut;
+
+        switch (currencyOutChoice) {
+            case 1:
+                currencyOut = Currency.USD;
+                break;
+            case 2:
+                currencyOut = Currency.EUR;
+                break;
+            case 3:
+                currencyOut = Currency.GBP;
+                break;
+            case 4:
+                currencyOut = Currency.CHF;
+                break;
+            case 5:
+                currencyOut = Currency.CAD;
+                break;
+            default:
+                System.out.println("Неверный выбор валюты. Попробуйте снова.");
+                return;
+        }
+        ExchangeOperation sumOut = exchangeService.exchange(sumIn, currencyIn, currencyOut);
+
+        System.out.println("Вы получите " + sumOut + " " + currencyOut);
     }
     public static void getOperation() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Введите ID операции: ");
         int id = scanner.nextInt();
-//TODO не сервис
+
         ExchangeOperation operation = ExchangeRepository.getOperation(id);
 
         if (operation != null) {
