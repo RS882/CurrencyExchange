@@ -113,7 +113,7 @@ public class ExchangeUI {
         }
         ExchangeOperation sumOut = exchangeService.exchange(sumIn, currencyIn, currencyOut);
 
-        System.out.println("Вы получите " + sumOut + " " + currencyOut);
+        System.out.println(sumOut);
     }
     public static void getOperation() {
         Scanner scanner = new Scanner(System.in);
@@ -121,7 +121,7 @@ public class ExchangeUI {
         System.out.print("Введите ID операции: ");
         int id = scanner.nextInt();
 
-        ExchangeOperation operation = ExchangeRepository.getOperation(id);
+        ExchangeOperation operation = exchangeService.getOperation(id);
 
         if (operation != null) {
             System.out.println(operation);
@@ -130,8 +130,8 @@ public class ExchangeUI {
         }
     }
     private static void getAllOperations() {
-        assert ExchangeRepository.getAllOperations() != null;
-        for (ExchangeOperation operation : ExchangeRepository.getAllOperations()) {
+        assert exchangeService.getAllOperations() != null;
+        for (ExchangeOperation operation : exchangeService.getAllOperations()) {
             System.out.println(operation);
         }
     }
