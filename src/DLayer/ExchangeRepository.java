@@ -12,7 +12,7 @@ public class ExchangeRepository {
     private static final String FILE_PATH = "src/DLayer/exchangeLog.txt";
 
     private File file;
-    private List<ExchangeOperation> operations = new ArrayList<>();
+    private static List<ExchangeOperation> operations = new ArrayList<>();
 
     public ExchangeRepository() {
         this.file = new File(FILE_PATH);
@@ -38,7 +38,7 @@ public class ExchangeRepository {
 
     }
 
-    public ExchangeOperation getOperation(int id){
+    public static ExchangeOperation getOperation(int id){
         for ( ExchangeOperation operation : operations) {
             if (operation.getId() == id){
                 return operation;
@@ -47,10 +47,7 @@ public class ExchangeRepository {
         return null;
     }
 
-    public ArrayList<ExchangeOperation> getAllOpertions(){
+    public static ArrayList<ExchangeOperation> getAllOperations(){
         return null;
     }
-
-
-
 }
