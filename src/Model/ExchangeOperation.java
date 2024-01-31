@@ -25,7 +25,7 @@ public class ExchangeOperation {
     private double sumIn;
     private double sumOut;
     private LocalDateTime dateOfOperation;
-    private final double COMMISION = 3;
+    private  double COMMISION = 3;
     private double rate;
 
     public ExchangeOperation(Currency currencyIn, Currency currencyOut, double sumIn) {
@@ -37,6 +37,20 @@ public class ExchangeOperation {
         this.rate = 0;
         this.sumOut = 0;
 
+    }
+
+    public ExchangeOperation(int id, Currency currencyIn, Currency currencyOut,
+                             double sumIn, double sumOut,
+                             LocalDateTime dateOfOperation,
+                             double rate, double COMMISION ) {
+        this.id = id;
+        this.currencyIn = currencyIn;
+        this.currencyOut = currencyOut;
+        this.sumIn = sumIn;
+        this.sumOut = sumOut;
+        this.dateOfOperation = dateOfOperation;
+        this.rate = rate;
+        this.COMMISION =COMMISION;
     }
 
     public void setSumOut(double sumOut) {
